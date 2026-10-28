@@ -5,7 +5,8 @@ using System.Linq;
 
 public class MicStringListener : MonoBehaviour
 {
-    public string[] keywords = new string[] { "test" };
+    public string[] keywords = new string[] { };
+    public float timer;
 
     private KeywordRecognizer keywordRecognizer;
     void Start()
@@ -23,9 +24,21 @@ public class MicStringListener : MonoBehaviour
         string spokenString = args.text;
         Debug.Log($"Voice input converted to string: {spokenString}");
 
-        if(spokenString == "test")
+        bool trueWord = keywords.Contains(spokenString);
+
+        if(trueWord)
         {
             Debug.Log("Correct input");
+        }
+    }
+
+    void Update()
+    {
+        timer -= Time.deltaTime;
+
+        if(timer <= 0.0)
+        {
+            Debug.Log("Time's up!");
         }
     }
 
